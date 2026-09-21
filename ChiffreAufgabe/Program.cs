@@ -38,6 +38,14 @@ namespace ChiffreAufgabe
                 ChiffrierVerfahren tagesschluessel = Funkzentrale.VerfahrenFuerTag(tag);
                 Console.WriteLine($"{tag:-12} {tagesschluessel("Lage stabil")}");
             }
+
+            Chiffre spiegel = new Chiffre("Spielen", Chiffren.Rueckwaerts, Chiffren.Rueckwaerts);
+            Chiffre zahlencode = new Chiffre("Zahlencode", Chiffren.Leet, Chiffren.LeetZurueck);
+
+            spiegel.Test("Mission erfuellt");
+            zahlencode.Test("Mission erfuellt");
+
+            Console.WriteLine("Doppelt: " + Funkzentrale.Doppelt("Basis Nord", Chiffren.Rueckwaerts, Chiffren.Leet));
         }
     }
 }

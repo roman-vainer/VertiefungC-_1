@@ -9,6 +9,9 @@
 // Func und Predicate mitbringt.
 // =====================================================================
 
+using System.Reflection.Metadata.Ecma335;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace MulticastUndFunc;
 
 // Eigener Delegate-Typ für eine "Benachrichtigung" (kein Rückgabewert).
@@ -20,16 +23,22 @@ public static class Program
     {
         Console.WriteLine("=== Mini-Projekt 2: Multicast-Delegates & Action/Func ===\n");
 
-        MulticastBeispiel();
-        Console.WriteLine();
-        AbmeldenBeispiel();
-        Console.WriteLine();
-        ActionFuncPredicateBeispiel();
-        Console.WriteLine();
-        RueckgabewertBeiMulticastBeispiel();
+        //MulticastBeispiel();
+        //Console.WriteLine();
+        //AbmeldenBeispiel();
+        //Console.WriteLine();
+        //ActionFuncPredicateBeispiel();
+        //Console.WriteLine();
+        //RueckgabewertBeiMulticastBeispiel();
+        //Aufgaben1();
+        //Aufgaben2();
+        Aufgaben3();
+
 
         Console.WriteLine("\n--- Ende. Siehe README.md für Erklärung & Übungsaufgaben. ---");
     }
+
+
 
     // -----------------------------------------------------------------
     // Teil 1: Multicast - mehrere Methoden an EINEN Delegate hängen.
@@ -135,5 +144,62 @@ public static class Program
             var einzelFunc = (Func<int, int>)einzelDelegate;
             Console.WriteLine($"  -> {einzelFunc(5)}");
         }
+    }
+
+    private static void Aufgaben1()
+    {
+        //     1. * *Eigene Pipeline bauen**: Erstelle einen `Func<int, int>`-Multicast -
+        //        Delegate mit drei Schritten(z.B. `+1`, `*2`, `-3`) und finde mit
+        //`GetInvocationList()` heraus, welches Zwischenergebnis jeder Schritt für
+        //sich alleine liefern würde.
+
+        Func<int, int> myFunc = i => i + 1;
+        myFunc += i => i / 0;
+        myFunc += i => i - 3;
+
+        foreach (Func<int, int> func in myFunc.GetInvocationList())
+        {
+            Console.WriteLine($"{func(5)}");
+        }
+    }
+
+    private static void Aufgaben2()
+    {
+        Predicate<string> istUpperCase = s => s.First() == s.ToUpper().First();
+
+        List<string> namen = ["Roman", "bob", "Alice"];
+
+        namen.RemoveAll(name => istUpperCase(name));
+        
+        Console.WriteLine($"{string.Join(", ", namen)}");
+    }
+
+    private static void Aufgaben3()
+    {
+        //     4. * *Eigene Erweiterung * *: Baue eine kleine "Ereignis-Pipeline" für ein
+        //Bestellsystem: Ein `Action<string>`-Delegate namens `bestellungAbgeschlossen`,
+        //an den du drei Methoden hängst: `RechnungErstellen`, `LagerAktualisieren`,
+        //`KundenEmailSenden`.
+
+        Action<string> bestellungAbgeschlossen = RechnungErstellen;
+        bestellungAbgeschlossen += LagerAktualisieren;
+        bestellungAbgeschlossen += KundenEmailSenden;
+        string bestellungNummer = "101 - 21 - 45";
+        bestellungAbgeschlossen(bestellungNummer);
+    }
+
+    private static void KundenEmailSenden(string s)
+    {
+        Console.WriteLine($"[EmailSender]: Die Bestellung {s} ist abgeschloßen.");
+    }
+
+    private static void LagerAktualisieren(string s)
+    {
+        Console.WriteLine($"[LagerService]: Die Bestellung {s} ist ausgelilefert.");
+    }
+
+    private static void RechnungErstellen(string s)
+    {
+        Console.WriteLine($"[RechnungService]: Die Rechnung für die Bestellung {s} ist erstellt.");
     }
 }
