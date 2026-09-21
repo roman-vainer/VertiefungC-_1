@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace EventsMitDelegates;
@@ -24,15 +25,35 @@ public class Bestellung
     }
     public void BestellungStornieren(int bestellungsNummer)
     {
-        string s = "";
-        s.Equals()
+        Bestellungen.Remove(bestellungsNummer);
+        OnBestellungStornieren(new BestellungArgs(bestellungsNummer));
     }
 
+    protected void OnBestellungStornieren(BestellungArgs bestellungArgs)
+    {
+        BestellungStorniert?.Invoke(this, bestellungArgs);
+    }
 }
-public class BestellungArgs: EventArgs
+public class BestellungArgs : EventArgs
 {
-    public int Bestellungnummer{ get; set; }
+    public int Bestellungnummer { get; set; }
+
+    public BestellungArgs(int bestellungnummer)
+    {
+        Bestellungnummer = bestellungnummer;
+    }
 }
 
-public class LagerService() { }
-public class KundenService() { }
+public class LagerService()
+{
+    public static void BestandAktualisieren(Object? sender, BestellungArgs args)
+    {
+        Console.WriteLine($"[LagerService] Die Artikel aus der Bestellung Nr. {args.Bestellungnummer} wurden wieder ins Lager zurückgebucht");
+    }
+}
+public class KundenService() { 
+    public static void NachrichtSenden(Object? sender, BestellungArgs args)
+    {
+        Console.WriteLine($"[KundenService] Ihre Bestellung Nr. {args.Bestellungnummer} wurde storniert");
+    }
+}

@@ -125,49 +125,56 @@ public static class Program
 {
     public static void Main()
     {
-        Console.WriteLine("=== Mini-Projekt 3: Events mit eigenem Delegate ===\n");
+        
+        Bestellung bestellung = new Bestellung([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        bestellung.BestellungStorniert += LagerService.BestandAktualisieren;
+        bestellung.BestellungStorniert += KundenService.NachrichtSenden;
 
-        var sensor = new Temperatursensor(schwellenwert: 30.0);
-        var alarmanlage = new Alarmanlage();
-        var emailDienst = new BenachrichtigungsDienst();
+        bestellung.BestellungStornieren(10);
 
-        // Anmelden (Subscriben) über +=. Der Sensor "weiss" nichts von
-        // Alarmanlage oder BenachrichtigungsDienst als Klassen - er ruft
-        // nur die angemeldeten Methoden auf.
-        sensor.TemperaturUeberschritten += alarmanlage.AufTemperatur_Reagieren;
-        sensor.TemperaturUeberschritten += alarmanlage.AufTemperatur_Reagieren;
-        sensor.TemperaturUeberschritten += emailDienst.SendeEmail;
-        sensor.TemperaturNormalisiert += alarmanlage.AufNormalisierung_Reagieren;
-        sensor.TemperaturNormalisiert += emailDienst.SendeEmail;
+        //Console.WriteLine("=== Mini-Projekt 3: Events mit eigenem Delegate ===\n");
 
-        Console.WriteLine("--- Messung 1: unauffällig ---");
-        sensor.MessungSimulieren(22.5);
+        //var sensor = new Temperatursensor(schwellenwert: 30.0);
+        //var alarmanlage = new Alarmanlage();
+        //var emailDienst = new BenachrichtigungsDienst();
 
-        Console.WriteLine("\n--- Messung 2: Schwellenwert überschritten (beide Abonnenten reagieren) ---");
-        sensor.MessungSimulieren(35.0);
+        //// Anmelden (Subscriben) über +=. Der Sensor "weiss" nichts von
+        //// Alarmanlage oder BenachrichtigungsDienst als Klassen - er ruft
+        //// nur die angemeldeten Methoden auf.
+        //sensor.TemperaturUeberschritten += alarmanlage.AufTemperatur_Reagieren;
+        //sensor.TemperaturUeberschritten += alarmanlage.AufTemperatur_Reagieren;
+        //sensor.TemperaturUeberschritten += emailDienst.SendeEmail;
+        //sensor.TemperaturNormalisiert += alarmanlage.AufNormalisierung_Reagieren;
+        //sensor.TemperaturNormalisiert += emailDienst.SendeEmail;
 
-        sensor.MessungSimulieren(20.0);
+        //Console.WriteLine("--- Messung 1: unauffällig ---");
+        //sensor.MessungSimulieren(22.5);
 
-        // Abmelden (Unsubscriben) über -=. Danach reagiert nur noch
-        // der verbleibende Abonnent.
-        sensor.TemperaturUeberschritten -= emailDienst.SendeEmail;
+        //Console.WriteLine("\n--- Messung 2: Schwellenwert überschritten (beide Abonnenten reagieren) ---");
+        //sensor.MessungSimulieren(35.0);
 
-        Console.WriteLine("\n--- E-Mail-Dienst hat sich abgemeldet ---");
-        Console.WriteLine("--- Messung 3: nur noch die Alarmanlage reagiert ---");
-        sensor.MessungSimulieren(40.0);
+        //sensor.MessungSimulieren(20.0);
 
-        // Anonyme Methode / Lambda als Subscriber - genauso möglich wie
-        // eine "normale" Methode.
-        sensor.TemperaturUeberschritten += (sender, e) =>
-            Console.WriteLine($"  [Inline-Lambda] Ich wurde auch benachrichtigt: {e.AktuelleTemperatur} °C");
+        //// Abmelden (Unsubscriben) über -=. Danach reagiert nur noch
+        //// der verbleibende Abonnent.
+        //sensor.TemperaturUeberschritten -= emailDienst.SendeEmail;
 
-        Console.WriteLine("\n--- Messung 4: Alarmanlage + Inline-Lambda reagieren ---");
-        sensor.MessungSimulieren(50.0);
+        //Console.WriteLine("\n--- E-Mail-Dienst hat sich abgemeldet ---");
+        //Console.WriteLine("--- Messung 3: nur noch die Alarmanlage reagiert ---");
+        //sensor.MessungSimulieren(40.0);
 
-        Console.WriteLine("\n--- Bonus: Das .NET-Standardmuster EventHandler<T> ---");
-        StandardEventPatternBeispiel();
+        //// Anonyme Methode / Lambda als Subscriber - genauso möglich wie
+        //// eine "normale" Methode.
+        //sensor.TemperaturUeberschritten += (sender, e) =>
+        //    Console.WriteLine($"  [Inline-Lambda] Ich wurde auch benachrichtigt: {e.AktuelleTemperatur} °C");
 
-        Console.WriteLine("\n--- Ende. Siehe README.md für Erklärung & Übungsaufgaben. ---");
+        //Console.WriteLine("\n--- Messung 4: Alarmanlage + Inline-Lambda reagieren ---");
+        //sensor.MessungSimulieren(50.0);
+
+        //Console.WriteLine("\n--- Bonus: Das .NET-Standardmuster EventHandler<T> ---");
+        //StandardEventPatternBeispiel();
+
+        //Console.WriteLine("\n--- Ende. Siehe README.md für Erklärung & Übungsaufgaben. ---");
     }
 
     // .NET bringt für genau dieses (sender, EventArgs)-Muster bereits einen
