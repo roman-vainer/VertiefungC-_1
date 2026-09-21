@@ -21,5 +21,12 @@ namespace ChiffreAufgabe
                 _ => VokaleZuSterne
             };
         }
+
+        public static string Doppelt(string klartext, ChiffrierVerfahren erst, ChiffrierVerfahren dann)
+        {
+            var text = erst(klartext);
+
+            return dann(text);
+        }
     }
 }

@@ -4,6 +4,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        //UebungTeil1.
         Buch HarryPotter =
         new Buch("Harry Potter und der Stein der Weisen", "J.K. Rowling", 1997, "978-3-551-35701-3", 0.45m);
         Buch HerrDerRinge =

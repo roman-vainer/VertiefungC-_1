@@ -1,7 +1,10 @@
 <Solution>
   <Project Path="../Delegates/01_BasicDelegates/01_BasicDelegates.csproj" />
   <Project Path="02_MulticastUndFunc/02_MulticastUndFunc.csproj" />
+  <Project Path="03_EventsMitDelegates/03_EventsMitDelegates.csproj" />
   <Project Path="04_AlleDelegateArten/04_AlleDelegateArten.csproj" />
+  <Project Path="05_EventBeispiele/05_EventBeispiele.csproj" />
+  <Project Path="06_StringsUndStringBuilder/06_StringsUndStringBuilder.csproj" />
   <Project Path="Bibliothek/Bibliothek.csproj" />
   <Project Path="ChiffreAufgabe/ChiffreAufgabe.csproj" Id="7298fd95-fb88-4b4b-aaa4-62a685e08ac1" />
   <Project Path="VertiefungC#_1/VertiefungC#_1.csproj" />

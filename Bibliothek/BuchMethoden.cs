@@ -33,8 +33,14 @@ public class BuchMethoden
         }
     }
 
-    
+    public static void BuchDrucken(Buch buch)
+    {
+        Console.WriteLine($"Titel: {buch.Titel}\nAutor: {buch.Autor}\nJahr: {buch.Jahr}");
+    }
 
-    
-   
+
+
+
+
+
 }
