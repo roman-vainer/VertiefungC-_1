@@ -28,6 +28,7 @@ namespace StringsUndStringBuilder;
 
 public static class Program
 {
+
     public static void Main()
     {
         Console.WriteLine("=== Mini-Projekt 6: Strings und StringBuilder ===\n");

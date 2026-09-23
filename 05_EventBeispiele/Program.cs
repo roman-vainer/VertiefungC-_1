@@ -23,6 +23,7 @@ public static class Program
 {
     public static void Main()
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         Console.WriteLine("=== Mini-Projekt 5: Drei Event-Beispiele ===\n");
 
         Beispiel1_Wecker();
@@ -41,9 +42,11 @@ public static class Program
         var wecker = new Wecker("07:00");
         var licht = new Schlafzimmerlicht();
         var kaffeemaschine = new Kaffeemaschine();
+        var radio = new Radio();
 
         wecker.Klingelt += licht.AnAlsReaktionAufKlingeln;
         wecker.Klingelt += kaffeemaschine.StartenAlsReaktionAufKlingeln;
+        wecker.Klingelt += radio.AnschaltenAlsReaktionAufKlingeln;
 
         wecker.ZeitAblaufenLassen();
     }
@@ -59,8 +62,9 @@ public static class Program
         warenkorb.ArtikelHinzugefuegt += rabattpruefer.PruefenAlsReaktionAufHinzufuegen;
         warenkorb.ArtikelHinzugefuegt += bonuspunkte.PunkteGutschreibenAlsReaktionAufHinzufuegen;
 
-        warenkorb.ArtikelHinzufuegen("Tastatur", 25.00m);
-        warenkorb.ArtikelHinzufuegen("Monitor", 30.00m);
+        warenkorb.ArtikelHinzufuegen("Tastatur", 25.00m, "Elektronik");
+        warenkorb.ArtikelHinzufuegen("Monitor", 30.00m, "Elektronik");
+        warenkorb.ArtikelHinzufuegen("Fahradreifen", 30.00m, "Sport");
     }
 
     private static void Beispiel3_Tuer()
