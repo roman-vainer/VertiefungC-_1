@@ -6,13 +6,16 @@ public class Rabattpruefer
 
     public void PruefenAlsReaktionAufHinzufuegen(object? sender, ArtikelHinzugefuegtEventArgs e)
     {
-        if (e.NeueSumme >= RabattSchwelle)
+        if (e.Kategorie == "Elektronik")
         {
-            Console.WriteLine($"  [Rabattprüfer] Warenkorbsumme {e.NeueSumme:C} >= {RabattSchwelle:C} -> 10% Rabatt freigeschaltet!");
-        }
-        else
-        {
-            Console.WriteLine($"  [Rabattprüfer] Noch {(RabattSchwelle - e.NeueSumme):C} bis zum Rabatt.");
+            if (e.NeueSumme >= RabattSchwelle)
+            {
+                Console.WriteLine($"  [Rabattprüfer] Warenkorbsumme {e.NeueSumme:C} >= {RabattSchwelle:C} -> 10% Rabatt freigeschaltet!");
+            }
+            else
+            {
+                Console.WriteLine($"  [Rabattprüfer] Noch {(RabattSchwelle - e.NeueSumme):C} bis zum Rabatt.");
+            }
         }
     }
 }

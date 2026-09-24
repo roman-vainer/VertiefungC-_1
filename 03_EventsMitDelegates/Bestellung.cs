@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace EventsMitDelegates;
 
-public class Bestellung
+public class Bestellung(List<int> bestellungen)
 {
-    public List<int> Bestellungen { get; }
+    public List<int> Bestellungen { get; } = bestellungen;
 
     public event EventHandler<BestellungArgs>? BestellungStorniert;
 
-    public Bestellung(List<int> bestellungen)
-
-    {
-        Bestellungen = bestellungen;
-    }
     public void AddBestellung(int bestellunNummer)
 
     {
