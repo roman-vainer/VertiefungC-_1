@@ -10,7 +10,7 @@ public class MyList<T>(int capacity = 0)
     const int DefaultCapacity = 8;
     private T[] _items = new T[capacity];
     public int Count { get; private set; } = 0;
-    public int Capacity() => _items.Length;
+    public int Capacity => _items.Length;
 
     public void Add(T element)
     {
@@ -20,7 +20,7 @@ public class MyList<T>(int capacity = 0)
 
     public void Insert(int index, T element)
     {
-        if (index > Count && index < 0)
+        if (index > Count || index < 0)
         {
             throw new ArgumentOutOfRangeException($"Index {index} is ouside of Range");
         }
@@ -43,12 +43,13 @@ public class MyList<T>(int capacity = 0)
 
     public bool RemoveAt(int index)
     {
-        if (index > Count && index < 0)
+        if (index >= Count || index < 0)
         {
             throw new ArgumentOutOfRangeException($"Index {index} is ouside of Range");
         }
         return RemoveElement(index);
     }
+
     public int RemoveAll(Predicate<T> match)
     {
         int freeIndex = 0;
@@ -66,8 +67,7 @@ public class MyList<T>(int capacity = 0)
         return oldCount - Count;
     }
 
-    private int FindIndexOfElement(T element) =>
-        Array.IndexOf(_items, element, 0, Count);
+    private int FindIndexOfElement(T element) => Array.IndexOf(_items, element, 0, Count);
 
     private bool RemoveElement(int indexOfElement)
     {
