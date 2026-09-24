@@ -6,6 +6,7 @@ using System.Text;
 namespace MyList;
 
 // checktest gptchat
+// Привет, Лев.
 public class MyList<T>(int capacity = 0)
 {
     const int DefaultCapacity = 8;
