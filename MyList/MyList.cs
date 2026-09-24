@@ -5,23 +5,21 @@ using System.Text;
 
 namespace MyList;
 
+// Hallo Asaddin.
 public class MyList<T>(int capacity = 0)
 {
     const int DefaultCapacity = 8;
     private T[] _items = new T[capacity];
     public int Count { get; private set; } = 0;
 
-    // Gibt die aktuelle Kapazität des internen Arrays zurück.
     public int Capacity => _items.Length;
 
-    // Fügt ein Element am Ende der Liste hinzu.
     public void Add(T element)
     {
         CheckCapacity();
         _items[Count++] = element;
     }
 
-    // Fügt ein Element an der angegebenen Position ein.
     public void Insert(int index, T element)
     {
         if (index > Count || index < 0)
@@ -38,7 +36,6 @@ public class MyList<T>(int capacity = 0)
         Count++;
     }
 
-    // Entfernt das erste Vorkommen des angegebenen Elements.
     public bool Remove(T element)
     {
         int indexOfElement = FindIndexOfElement(element);
@@ -46,7 +43,6 @@ public class MyList<T>(int capacity = 0)
 
     }
 
-    // Entfernt das Element an der angegebenen Position.
     public bool RemoveAt(int index)
     {
         if (index >= Count || index < 0)
@@ -56,8 +52,6 @@ public class MyList<T>(int capacity = 0)
         return RemoveElement(index);
     }
 
-    // Entfernt alle Elemente, die die angegebene Bedingung erfüllen.
-    // Gibt die Anzahl der entfernten Elemente zurück.
     public int RemoveAll(Predicate<T> match)
     {
         int freeIndex = 0;
@@ -75,12 +69,8 @@ public class MyList<T>(int capacity = 0)
         return oldCount - Count;
     }
 
-    // Sucht den Index des angegebenen Elements.
-    // Gibt -1 zurück, wenn das Element nicht gefunden wurde.
     private int FindIndexOfElement(T element) => Array.IndexOf(_items, element, 0, Count);
 
-    // Entfernt ein Element anhand seines Indexes
-    // und verschiebt die nachfolgenden Elemente nach links.
     private bool RemoveElement(int indexOfElement)
     {
         for (int i = indexOfElement; i < Count - 1; i++)
@@ -92,10 +82,8 @@ public class MyList<T>(int capacity = 0)
         return true;
     }
 
-    // Gibt alle gespeicherten Elemente als Zeichenkette zurück.
     public override string ToString() => String.Join(", ", _items.Take(Count));
 
-    // Prüft, ob im internen Array noch genügend Speicherplatz vorhanden ist.
     private void CheckCapacity()
     {
         if (_items.Length <= Count)
@@ -104,7 +92,6 @@ public class MyList<T>(int capacity = 0)
         }
     }
 
-    // Vergrößert das interne Array, wenn die aktuelle Kapazität nicht ausreicht.
     private void ResizeArray()
     {
         T[] newBucket = new T[_items.Length == 0 ? DefaultCapacity : _items.Length * 2];
