@@ -5,18 +5,12 @@ using System.Text;
 
 namespace MyList;
 
-
-public class MyList<T>
+public class MyList<T>(int capacity = 0)
 {
-    const int DefaultCapasity = 8;
-    private T[] _items;
-    public int Count { get; private set; }
-
-    public MyList(int capacity = 0)
-    {
-        _items = new T[capacity];
-        Count = 0;
-    }
+    const int DefaultCapacity = 8;
+    private T[] _items = new T[capacity];
+    public int Count { get; private set; } = 0;
+    public int Capacity() => _items.Length;
 
     public void Add(T element)
     {
@@ -24,8 +18,12 @@ public class MyList<T>
         _items[Count++] = element;
     }
 
-    public void Add(int index, T element)
+    public void Insert(int index, T element)
     {
+        if (index > Count && index < 0)
+        {
+            throw new ArgumentOutOfRangeException($"Index {index} is ouside of Range");
+        }
         CheckCapacity();
 
         for (int i = Count; i > index; i--)
@@ -43,9 +41,14 @@ public class MyList<T>
 
     }
 
-    public bool RemoveAt(int index) =>
-        index < Count && RemoveElement(index);
-
+    public bool RemoveAt(int index)
+    {
+        if (index > Count && index < 0)
+        {
+            throw new ArgumentOutOfRangeException($"Index {index} is ouside of Range");
+        }
+        return RemoveElement(index);
+    }
     public int RemoveAll(Predicate<T> match)
     {
         int freeIndex = 0;
@@ -73,10 +76,9 @@ public class MyList<T>
             _items[i] = _items[i + 1];
         }
         Count--;
+        Array.Clear(_items, Count, 1);
         return true;
     }
-
-    public int Capacity() => _items.Length;
 
     public override string ToString() => String.Join(", ", _items.Take(Count));
 
@@ -90,15 +92,11 @@ public class MyList<T>
 
     private void ResizeArray()
     {
-        T[] newBucket = new T[_items.Length == 0 ? DefaultCapasity : _items.Length * 2];
+        T[] newBucket = new T[_items.Length == 0 ? DefaultCapacity : _items.Length * 2];
         for (int i = 0; i < _items.Length; i++)
         {
             newBucket[i] = _items[i];
         }
         _items = newBucket;
     }
-
-
-
-
 }

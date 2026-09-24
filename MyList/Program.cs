@@ -16,7 +16,7 @@
             Console.WriteLine(list.Capacity());
 
 
-            list.Add(1, 5);
+            list.Insert(1, 5);
             Console.WriteLine(list);
             Console.WriteLine(list.Count);
             Console.WriteLine(list.Capacity());
