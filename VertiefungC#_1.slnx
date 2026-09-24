@@ -5,8 +5,10 @@
   <Project Path="04_AlleDelegateArten/04_AlleDelegateArten.csproj" />
   <Project Path="05_EventBeispiele/05_EventBeispiele.csproj" />
   <Project Path="06_StringsUndStringBuilder/06_StringsUndStringBuilder.csproj" />
+  <Project Path="07_Generics/07_Generics.csproj" />
   <Project Path="Bibliothek/Bibliothek.csproj" />
   <Project Path="ChiffreAufgabe/ChiffreAufgabe.csproj" Id="7298fd95-fb88-4b4b-aaa4-62a685e08ac1" />
+  <Project Path="MyList/MyList.csproj" Id="e9228a7e-bef9-4a15-b386-4ceed49348a8" />
   <Project Path="Test/TestSpeicher.csproj" Id="d63bff76-0f1d-4e29-9484-5b625ca66305" />
   <Project Path="VertiefungC#_1/VertiefungC#_1.csproj" />
 </Solution>
