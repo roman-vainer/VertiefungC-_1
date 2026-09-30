@@ -9,6 +9,7 @@
   <Project Path="Bibliothek/Bibliothek.csproj" />
   <Project Path="ChiffreAufgabe/ChiffreAufgabe.csproj" Id="7298fd95-fb88-4b4b-aaa4-62a685e08ac1" />
   <Project Path="ExtentionsMethods/ExtentionsMethods.csproj" Id="6b91e0cd-8f80-43d0-a955-bf3992354f70" />
+  <Project Path="LINQ/LINQ.csproj" Id="71d2cd57-2677-4186-8d94-d6eb6f09282f" />
   <Project Path="MyList/MyList.csproj" Id="e9228a7e-bef9-4a15-b386-4ceed49348a8" />
   <Project Path="Test/TestSpeicher.csproj" Id="d63bff76-0f1d-4e29-9484-5b625ca66305" />
   <Project Path="VertiefungC#_1/VertiefungC#_1.csproj" />

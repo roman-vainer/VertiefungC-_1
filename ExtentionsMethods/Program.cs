@@ -1,4 +1,6 @@
-﻿namespace ExtentionsMethods
+﻿using System.Security.Cryptography;
+
+namespace ExtentionsMethods
 {
     internal class Program
     {
@@ -16,6 +18,11 @@
             //List<string> l = [.. "London is a Capital of Great Britain".Split(' ')];
 
             //Console.WriteLine(String.Join(' ', l.LongerThan(2)));
+
+            //List<int> l = [1, 2, 3, 4, 5, 6, 7];
+
+            //Console.WriteLine(l.ToPrettyString());
+
         }
     }
 }
