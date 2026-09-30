@@ -52,13 +52,22 @@ public static class ExtentionMethods
 
     public static List<string> LongerThan(this List<string> words, int length)
     {
-        List<string> newList = [];
+        List<string> newList = [ ];
         foreach (var item in words)
         {
             if (item.Length > length) { newList.Add(item); }
         }
         return newList;
     }
+
+    public static string ToPrettyString<T>(this List<T> l)
+    {
+        return String.Join(',', l);
+    }
+
+    
+
+
 }
 
 
