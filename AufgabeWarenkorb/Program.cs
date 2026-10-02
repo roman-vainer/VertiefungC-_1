@@ -59,8 +59,8 @@ public class Program
         // g) Gruppieren Sie die Produkte nach dem ersten Buchstaben des Namens. Als Elemente in den 
         //Gruppen sollen nur die Namen der Produkte vorhanden sein.
         Console.WriteLine();
-        var ProdukteGruppen = produkte.Select(p => p.Name).GroupBy(p => p[0]).ToList();
-        ProdukteGruppen.ForEach(g =>
+        var produkteGruppen = produkte.Select(p => p.Name).GroupBy(p => p[0]).ToList();
+        produkteGruppen.ForEach(g =>
         {
             Console.WriteLine($"\n{g.Key}");
             g.ToList().ForEach(p => Console.WriteLine(p));
@@ -69,7 +69,35 @@ public class Program
         // h) Bilden Sie einen Join zwischen den Bestellungen und den Produkten. Selektieren Sie dann die 
         //Werte für Monat, ProduktNr, Name, Preis und Versendet sortiert nach dem Preis.
         Console.WriteLine();
+        var bestellungProdukt = kunden
+            .Select(k => k.Bestellungen)
+            .Select(x => x
+            .Join(produkte, b => b.ProduktNr, p => p.ProduktNr, (b, p) => (b.Monat, b.Versendet, p.ProduktNr, p.Preis))
+            .OrderBy(x => x.Preis)).ToList();
+        bestellungProdukt.ForEach(y => y.ToList().ForEach(x => Console.WriteLine(
+            $"Monat: {x.Monat} - Versendet: {x.Versendet} - ProduktNr: {x.ProduktNr} - Preis: {x.Preis}")));
 
+        // i) Selektieren Sie alle Kunden mit Name, Wohnort und Anzahl Bestellungen.
+        Console.WriteLine();
+        var nameOrtCountOfOrder = kunden.Select(x => (x.Name, Wohnort: x.Ort, Bestellungenanzahl: x.Bestellungen.Length)).ToList();
+        nameOrtCountOfOrder.ForEach(x => Console.WriteLine($"Name: {x.Name} - Ort: {x.Wohnort} - Anzahl der Bestellungen: {x.Bestellungenanzahl}"));
+
+        // j) Summieren Sie die Preise aller Produkte aus der Produktliste
+        Console.WriteLine();
+        var produktePreise = produkte.Sum(p => p.Preis);
+        Console.WriteLine($"Die Summe die Preise aller Produkte ist: {produktePreise}");
+
+        // k) Selektieren Sie alle Kunden mit ihrem Namen und dem Gesamtbetrag ihrer Bestellungen.
+        Console.WriteLine();
+
+
+        var v = kunden
+            .Select(k => (k.Name, Betrag: k.Bestellungen
+            .Join(produkte, b => b.ProduktNr, p => p.ProduktNr, (b, p) => p.Preis * b.Anzahl)
+            .Sum()))
+            .ToList();
+
+        v.ForEach(x => Console.WriteLine($"{x.Name}, {x.Betrag}"));
 
     }
 }
