@@ -1,0 +1,8 @@
+01.10.2026 08:15 - INFO - Server gestartet
+01.10.2026 08:17 - INFO - Benutzer Max angemeldet
+01.10.2026 08:21 - WARNING - Speicher zu 80 % ausgelastet
+01.10.2026 08:24 - INFO - Benutzer Anna angemeldet
+01.10.2026 08:31 - ERROR - Verbindung zur Datenbank fehlgeschlagen
+01.10.2026 08:32 - INFO - Verbindung zur Datenbank wiederhergestellt
+01.10.2026 08:45 - WARNING - Speicher zu 90 % ausgelastet
+01.10.2026 08:52 - INFO - Benutzer Max abgemeldet
